@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { TopAppBarComponent } from '../../src/components/TopAppBar';
 import { BottomNavBarComponent, NavTabId } from '../../src/components/BottomNavBar';
+import { ShoppingModeComponent } from '../../src/components/ShoppingMode';
+import { ListItem, Store } from '../../src/models/types';
 
 // Mock lightweight container for Node test environment
 function createMockContainer() {
@@ -83,5 +85,35 @@ describe('Material 3 Stock Android Navigation & Theme Components', () => {
 
     expect(container.innerHTML).toContain('5');
     expect(container.innerHTML).toContain('md-navigation-bar__item--active');
+  });
+
+  it('renders ShoppingModeComponent with progress bar, next stop badge, and picked items', () => {
+    const { container } = createMockContainer();
+    const shoppingMode = new ShoppingModeComponent(container, () => {}, () => {});
+
+    const mockItems: ListItem[] = [
+      { id: '1', listId: 'L1', title: 'Nectarines', categoryKey: 'produce', isCollected: false, calculatedSortIndex: 10 },
+      { id: '2', listId: 'L1', title: 'Rice drink', categoryKey: 'plant_milks', isCollected: true, collectedOrder: 1, calculatedSortIndex: 20 }
+    ];
+    const mockStore: Store = {
+      id: 'tesco-miskolc-szentpeteri',
+      chain: 'Tesco',
+      name: 'Tesco Szentpéteri kapu',
+      address: 'Szentpéteri kapu 103',
+      city: 'Miskolc',
+      hasCustomMap: true,
+      updatedAt: '2026-08-30'
+    };
+
+    shoppingMode.render(mockItems, mockStore);
+
+    expect(container.innerHTML).toContain('Live Shopping Mode');
+    expect(container.innerHTML).toContain('md-linear-progress');
+    expect(container.innerHTML).toContain('1 of 2 picked');
+    expect(container.innerHTML).toContain('50%');
+    expect(container.innerHTML).toContain('NEXT STOP');
+    expect(container.innerHTML).toContain('Got it');
+    expect(container.innerHTML).toContain('#1');
+    expect(container.innerHTML).toContain('Finish & Submit Trip Sequence');
   });
 });

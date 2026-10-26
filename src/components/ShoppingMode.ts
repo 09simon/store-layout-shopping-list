@@ -107,11 +107,11 @@ export class ShoppingModeComponent {
               </div>
               <div class="md-chip-group">
                 ${collected.map(item => `
-                  <div class="md-chip md-chip--assist md-chip--success">
+                  <button class="md-chip md-chip--assist md-chip--success" data-action="unpick" data-id="${item.id}" title="Tap to undo pick" style="cursor: pointer;">
                     <span class="md-chip__icon">✓</span>
                     <span class="md-chip__label">${item.title}</span>
                     <span class="md-chip__badge">#${item.collectedOrder || ''}</span>
-                  </div>
+                  </button>
                 `).join('')}
               </div>
             </div>
@@ -124,6 +124,13 @@ export class ShoppingModeComponent {
       btn.addEventListener('click', (e) => {
         const card = (e.currentTarget as HTMLElement).closest('.md-pick-card');
         const id = card?.getAttribute('data-id');
+        if (id) this.onPickItem(id);
+      });
+    });
+
+    this.container.querySelectorAll('[data-action="unpick"]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = (e.currentTarget as HTMLElement).getAttribute('data-id');
         if (id) this.onPickItem(id);
       });
     });

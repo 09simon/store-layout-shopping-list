@@ -1,4 +1,4 @@
-# Quickstart & Verification Guide: Community-Driven Store Layout Shopping List
+# Quickstart & Verification Guide: Community-Driven Store Layout Shopping List with Stock Android UI
 
 ## Prerequisites
 
@@ -28,7 +28,7 @@ Prove that picking items at **Tesco Szentpéteri kapu, Miskolc** in real time up
 
 #### Step 1: Create a Shopping List
 1. Open application in browser (`http://localhost:5173`).
-2. Click **Create New List** and enter `Weekly Tesco Trip`.
+2. Click the Floating Action Button (**Add Item**) or Create New List and enter `Weekly Tesco Trip`.
 3. Add items:
    - Nectarines (`Produce`)
    - Organic rice drink (`Plant milks`)
@@ -39,12 +39,13 @@ Prove that picking items at **Tesco Szentpéteri kapu, Miskolc** in real time up
    - Toothpaste (`Personal hygiene`)
 
 #### Step 2: Select Store Location
-1. Select store location dropdown $\rightarrow$ Search **Tesco Szentpéteri kapu, Miskolc**.
+1. Select store location dropdown or modal sheet $\rightarrow$ Search **Tesco Szentpéteri kapu, Miskolc**.
 2. Click **Apply Store Layout**.
 
 #### Step 3: Execute Interactive Shopping Mode
-1. Click **Start Shopping**.
-2. Tap items as collected in sequential shelf order:
+1. Click **Start Shopping** or switch to the Shopping Mode navigation tab.
+2. Observe the Stock Android linear progress indicator and tactile checklist checkboxes.
+3. Tap items as collected in sequential shelf order:
    1. `Got the nectarines`
    2. `Got the organic rice drink`
    3. `Got the whole wheat crescent roll`
@@ -52,7 +53,7 @@ Prove that picking items at **Tesco Szentpéteri kapu, Miskolc** in real time up
    5. `Got the bulgur`
    6. `Got the rat poison`
    7. `Got the toothpaste`
-3. Click **Finish Shopping**.
+4. Click **Finish Shopping**.
 
 #### Expected Outcome
 - App saves the sequence log locally and registers relative section transitions.
@@ -60,7 +61,21 @@ Prove that picking items at **Tesco Szentpéteri kapu, Miskolc** in real time up
 
 ---
 
-### Scenario 2: Offline Shopping Reliability Test
+### Scenario 2: Stock Android UI & Theming Verification
+
+Prove that the interface renders with authentic Stock Android (Material Design 3) elements.
+
+1. Launch app at `http://localhost:5173`.
+2. Verify the Top App Bar and the Bottom Navigation Bar with pill indicators (`Shopping List`, `Shopping Mode`, `Store Map`).
+3. Verify that the Floating Action Button (FAB) adheres to Material 3 geometry and floating elevation.
+4. Toggle theme (Light / Dark mode):
+   - In light mode, surface containers use high-contrast light tonal palettes.
+   - In dark mode, surface containers adapt to deep tonal grey/blue surfaces with WCAG AA compliant text.
+5. Inspect touch targets: all buttons and checkboxes measure at least 48x48px equivalent touch area.
+
+---
+
+### Scenario 3: Offline Shopping Reliability Test
 
 Prove that shopping mode operates without internet connectivity.
 
@@ -71,4 +86,4 @@ Prove that shopping mode operates without internet connectivity.
 
 #### Expected Outcome
 - All pick timestamps and collected states are recorded without error or UI blocking.
-- Sequence log is saved to local IndexedDB storage and queued for background sync once online mode is restored.
+- Sequence log is saved to local storage and queued for background sync once online mode is restored.

@@ -1,4 +1,4 @@
-# Data Model: Community-Driven Store Layout Shopping List
+# Data Model: Community-Driven Store Layout Shopping List with Stock Android UI
 
 ## Entities & Schemas
 
@@ -41,7 +41,7 @@ Individual item within a shopping list.
 | `id` | String (UUID) | Yes | Item entry identifier |
 | `listId` | String (UUID) | Yes | Foreign key to `ShoppingList` |
 | `title` | String | Yes | Product name (e.g. "Nectarines", "Pick winter salami") |
-| `categoryKey` | String | Yes | Normalized section category (e.g. `produce`, `bakery`, `cold_cuts`, `hygiene`) |
+| `categoryKey` | String | Yes | Normalized section category (e.g. `produce`, `bakery`, `cold_cuts`, `personal_care`) |
 | `isCollected` | Boolean | Yes | `true` if picked during shopping trip |
 | `collectedOrder` | Number | No | 1-based sequential order index recorded during shopping mode |
 | `collectedAt` | String (ISO-8601) | No | Exact timestamp item was marked collected |
@@ -77,6 +77,18 @@ Aggregated directed graph representing physical section progression for a store 
 | `nodeWeights` | Record<String, Number> | Yes | Total pick count per category node |
 | `edgeWeights` | Record<String, Record<String, Number>> | Yes | Pairwise transition matrix ($W(A, B)$) |
 | `computedOrder` | Array\<String\> | Yes | Ordered category keys derived via Weighted Pairwise Frequency topological sort |
+
+---
+
+### 6. Theme & Android Navigation State (`ThemeAndNavigation`)
+Tracks application theme mode and Stock Android navigation destination.
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `themeMode` | Enum | Yes | `light`, `dark`, or `system` |
+| `activeTab` | Enum | Yes | `list`, `stores`, `layout`, `shopping` |
+| `badgeCounts` | Record<String, Number> | No | Numerical notification badge values per destination |
+| `isLiveShopping`| Boolean | Yes | Active pulse badge state on Shopping Mode destination |
 
 ---
 

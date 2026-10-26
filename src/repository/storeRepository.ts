@@ -55,12 +55,13 @@ export class StoreRepository {
     return item;
   }
 
-  async toggleListItem(itemId: string): Promise<ListItem | null> {
+  async toggleListItem(itemId: string, orderIndex?: number): Promise<ListItem | null> {
     const items = await db.getItems();
     const item = items.find(i => i.id === itemId);
     if (!item) return null;
     item.isCollected = !item.isCollected;
     item.collectedAt = item.isCollected ? new Date().toISOString() : undefined;
+    item.collectedOrder = item.isCollected ? (orderIndex ?? item.collectedOrder) : undefined;
     await db.saveItem(item);
     return item;
   }

@@ -62,6 +62,7 @@ export class AppController {
     }
 
     this.bindDOM();
+    this.switchTab(this.activeTab);
     await this.refreshUI();
   }
 
@@ -135,7 +136,8 @@ export class AppController {
     this.shoppingMode = new ShoppingModeComponent(
       shoppingModeRoot,
       async (itemId) => {
-        const item = await storeRepository.toggleListItem(itemId);
+        const nextOrder = sequenceLoggerService.getActivePicksCount() + 1;
+        const item = await storeRepository.toggleListItem(itemId, nextOrder);
         if (item && item.isCollected) {
           sequenceLoggerService.recordPick(item);
         }
@@ -179,8 +181,15 @@ export class AppController {
     shoppingModeRoot.style.display = tab === 'shopping' ? 'block' : 'none';
     layoutViewerRoot.style.display = tab === 'map' ? 'block' : 'none';
 
+    editorRoot.classList.toggle('hidden', tab !== 'list');
+    listViewRoot.classList.toggle('hidden', tab !== 'list');
+    storeSelectorRoot.classList.toggle('hidden', tab === 'map');
+    shoppingModeRoot.classList.toggle('hidden', tab !== 'shopping');
+    layoutViewerRoot.classList.toggle('hidden', tab !== 'map');
+
     if (fabRoot) {
       fabRoot.style.display = tab === 'list' ? 'block' : 'none';
+      fabRoot.classList.toggle('hidden', tab !== 'list');
     }
 
     this.refreshUI();

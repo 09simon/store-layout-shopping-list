@@ -1,13 +1,13 @@
 # Material Design 3 UI Contracts
 
-**Feature**: Stock Android Design System UI Update
-**Feature Branch**: `002-stock-android-ui`
+**Feature**: Community-Driven Store Layout Shopping List with Stock Android UI
+**Feature Branch**: `001-store-layout-shopping-list`
 **Date**: 2026-08-31
 
-## 1. CSS Design Token Contracts (`tokens.css`)J
+## 1. CSS Design Token Contracts (`tokens.css`)
 All styles MUST reference the following Material 3 variable names:
 
-``@css
+```css
 /* System Color Roles */
 --md-sys-color-primary: #hex;
 --md-sys-color-on-primary: #hex;
@@ -42,7 +42,7 @@ All styles MUST reference the following Material 3 variable names:
 --md-sys-shape-corner-full: 9999px;
 
 /* Elevation */
---md-sys-elevation-level0 none;
+--md-sys-elevation-level0: none;
 --md-sys-elevation-level1: 0px 1px 3px 1px rgba(0,0,0,0.15), 0px 1px 2px 0px rgba(0,0,0,0.30);
 --md-sys-elevation-level2: 0px 2px 6px 2px rgba(0,0,0,0.15), 0px 1px 2px 0px rgba(0,0,0,0.30);
 --md-sys-elevation-level3: 0px 1px 8px 3px rgba(0,0,0,0.15), 0px 4px 4px 0px rgba(0,0,0,0.30);
@@ -59,35 +59,35 @@ All styles MUST reference the following Material 3 variable names:
   <button class="md-navigation-bar__item md-navigation-bar__item--active" data-tab="list" aria-selected="true">
     <div class="md-navigation-bar__icon-container">
       <div class="md-navigation-bar__indicator"></div>
-      <span class="md-icon">📈</span>
+      <span class="md-icon">📝</span>
     </div>
     <span class="md-navigation-bar__label">Shopping List</span>
   </button>
   <button class="md-navigation-bar__item" data-tab="shopping" aria-selected="false">
     <div class="md-navigation-bar__icon-container">
       <div class="md-navigation-bar__indicator"></div>
-      <span class="md-icon">🍍</span>
-      <span class="md-badge md-badge--live">REC</span>
+      <span class="md-icon">🛒</span>
+      <span class="md-badge md-badge--live">LIVE</span>
     </div>
-    <span class="md-navigation-bar__label">Shop</span>
+    <span class="md-navigation-bar__label">Shopping Mode</span>
   </button>
   <button class="md-navigation-bar__item" data-tab="map" aria-selected="false">
     <div class="md-navigation-bar__icon-container">
       <div class="md-navigation-bar__indicator"></div>
-      <span class="md-icon">🩱</span>
+      <span class="md-icon">🗺️</span>
     </div>
-    <span class="md-navigation-bar__infl">Store Map</span>
+    <span class="md-navigation-bar__label">Store Map</span>
   </button>
 </nav>
 ```
 
 ---
 
-## 3. Floating Action Button (FAT) Contract
+## 3. Floating Action Button (FAB) Contract
 
 ```html
 <button class="md-fab md-fab--extended" aria-label="Add product to shopping list">
-  <span class="md-fab__icon">➚�</span>
+  <span class="md-fab__icon">+</span>
   <span class="md-fab__label">Add Item</span>
 </button>
 ```
@@ -107,7 +107,7 @@ All styles MUST reference the following Material 3 variable names:
     <!-- Content slot -->
   </div>
 </div>
-@```
+```
 
 ---
 
