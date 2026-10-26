@@ -1,0 +1,865 @@
+@import './tokens.css';
+
+/* ==========================================================================
+   Material Design 3 App Layout & Dock
+   ========================================================================== */
+.md-app-body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  font-family: var(--md-sys-typescale-font-family);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.md-layout-dock {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+}
+
+.md-main-content {
+  flex: 1;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 1rem 1rem 7.5rem 1rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Material 3 Top App Bar
+   ========================================================================== */
+.md-top-app-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--md-sys-color-surface-container);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  box-shadow: var(--md-sys-elevation-level1);
+  transition: background-color var(--md-sys-motion-duration-medium) ease;
+}
+
+.md-top-app-bar__leading {
+  display: flex;
+  align-items: center;
+  margin-right: 0.75rem;
+}
+
+.md-top-app-bar__brand-icon {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--md-sys-color-primary-container);
+  border-radius: var(--md-sys-shape-corner-full);
+}
+
+.md-top-app-bar__headline {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.md-top-app-bar__title {
+  font: var(--md-sys-typescale-title-large);
+  color: var(--md-sys-color-on-surface);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.md-top-app-bar__subtitle {
+  font: var(--md-sys-typescale-body-small);
+  color: var(--md-sys-color-on-surface-variant);
+  margin: 0;
+}
+
+.md-top-app-bar__trailing {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ==========================================================================
+   Material 3 Stock Android Bottom Navigation Bar
+   ========================================================================== */
+.md-navigation-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  z-index: 60;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--md-sys-color-surface-container);
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+  box-shadow: var(--md-sys-elevation-level2);
+  padding: 0 0.5rem;
+}
+
+.md-navigation-bar__item {
+  flex: 1;
+  height: 100%;
+  max-width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: var(--md-sys-color-on-surface-variant);
+  transition: color var(--md-sys-motion-duration-short) ease;
+}
+
+.md-navigation-bar__icon-container {
+  position: relative;
+  width: 64px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--md-sys-shape-corner-full);
+}
+
+.md-navigation-bar__indicator {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--md-sys-shape-corner-full);
+  background-color: var(--md-sys-color-secondary-container);
+  transform: scale(0.6);
+  opacity: 0;
+  transition: transform var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-emphasized),
+              opacity var(--md-sys-motion-duration-short) ease;
+}
+
+.md-navigation-bar__icon {
+  position: relative;
+  z-index: 2;
+  font-size: 1.25rem;
+}
+
+.md-navigation-bar__label {
+  font: var(--md-sys-typescale-label-medium);
+  margin-top: 4px;
+  transition: font-weight var(--md-sys-motion-duration-short) ease;
+}
+
+.md-navigation-bar__item--active {
+  color: var(--md-sys-color-on-surface);
+}
+
+.md-navigation-bar__item--active .md-navigation-bar__indicator {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.md-navigation-bar__item--active .md-navigation-bar__label {
+  font-weight: 700;
+  color: var(--md-sys-color-on-surface);
+}
+
+.md-navigation-bar__badge {
+  position: absolute;
+  top: 0px;
+  right: 8px;
+  z-index: 3;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: var(--md-sys-shape-corner-full);
+  background-color: var(--md-sys-color-error);
+  color: var(--md-sys-color-on-error);
+  font: var(--md-sys-typescale-label-small);
+  font-size: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.md-navigation-bar__badge--pulse {
+  background-color: var(--md-sys-color-error);
+  animation: md-badge-pulse 1.8s infinite;
+}
+
+@keyframes md-badge-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.15); opacity: 0.75; }
+}
+
+/* ==========================================================================
+   Material 3 Floating Action Button (FAB)
+   ========================================================================== */
+.md-fab {
+  position: fixed;
+  bottom: 96px;
+  right: 20px;
+  z-index: 55;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  height: 56px;
+  padding: 0 1.25rem;
+  border-radius: var(--md-sys-shape-corner-large);
+  border: none;
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  box-shadow: var(--md-sys-elevation-level3);
+  cursor: pointer;
+  font: var(--md-sys-typescale-label-large);
+  font-weight: 700;
+  min-width: 56px;
+  transition: transform var(--md-sys-motion-duration-short) ease,
+              box-shadow var(--md-sys-motion-duration-short) ease,
+              background-color var(--md-sys-motion-duration-short) ease;
+}
+
+.md-fab:hover {
+  box-shadow: var(--md-sys-elevation-level4);
+  transform: translateY(-2px);
+}
+
+.md-fab:active {
+  box-shadow: var(--md-sys-elevation-level1);
+  transform: scale(0.96);
+}
+
+.md-fab__icon {
+  font-size: 1.25rem;
+}
+
+/* ==========================================================================
+   Material 3 Modal Bottom Sheet & Dialog
+   ========================================================================== */
+.md-scrim {
+  position: fixed;
+  inset: 0;
+  background-color: var(--md-sys-color-scrim);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  animation: md-fade-in var(--md-sys-motion-duration-medium) ease;
+}
+
+.md-bottom-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 640px;
+  margin: 0 auto;
+  background-color: var(--md-sys-color-surface-container-high);
+  border-radius: 28px 28px 0 0;
+  box-shadow: var(--md-sys-elevation-level5);
+  z-index: 101;
+  padding: 1rem 1.5rem 2rem 1.5rem;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: md-slide-up var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-decelerated);
+}
+
+@keyframes md-slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes md-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.md-bottom-sheet__drag-handle {
+  width: 36px;
+  height: 4px;
+  background-color: var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-full);
+  margin: 0 auto 1rem auto;
+}
+
+.md-bottom-sheet__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.md-bottom-sheet__headline h3 {
+  margin: 0;
+}
+
+.md-bottom-sheet__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.md-bottom-sheet__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* ==========================================================================
+   Material 3 Cards & Containers
+   ========================================================================== */
+.md-card {
+  background-color: var(--md-sys-color-surface-container-low);
+  border-radius: var(--md-sys-shape-corner-large);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--md-sys-elevation-level1);
+  transition: transform var(--md-sys-motion-duration-short) ease,
+              box-shadow var(--md-sys-motion-duration-short) ease,
+              border-color var(--md-sys-motion-duration-short) ease;
+}
+
+.md-card--tonal {
+  background-color: var(--md-sys-color-surface-container);
+  border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.md-card--elevated {
+  background-color: var(--md-sys-color-surface-container-low);
+  box-shadow: var(--md-sys-elevation-level2);
+}
+
+/* ==========================================================================
+   Material 3 Form Inputs (Outlined Text Fields)
+   ========================================================================== */
+.md-text-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.md-text-field--outlined {
+  position: relative;
+}
+
+.md-text-field__input {
+  width: 100%;
+  height: 56px;
+  padding: 1rem 1rem 0.25rem 1rem;
+  background-color: transparent;
+  color: var(--md-sys-color-on-surface);
+  border: 1.5px solid var(--md-sys-color-outline);
+  border-radius: var(--md-sys-shape-corner-small);
+  font: var(--md-sys-typescale-body-large);
+  outline: none;
+  transition: border-color var(--md-sys-motion-duration-short) ease,
+              box-shadow var(--md-sys-motion-duration-short) ease;
+}
+
+.md-text-field__input:focus {
+  border-color: var(--md-sys-color-primary);
+  border-width: 2px;
+}
+
+.md-text-field__label {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  color: var(--md-sys-color-on-surface-variant);
+  font: var(--md-sys-typescale-body-large);
+  pointer-events: none;
+  transform-origin: left top;
+  transition: transform var(--md-sys-motion-duration-short) ease,
+              color var(--md-sys-motion-duration-short) ease;
+}
+
+.md-text-field__input:focus ~ .md-text-field__label,
+.md-text-field__input:not(:placeholder-shown) ~ .md-text-field__label {
+  transform: translateY(-0.6rem) scale(0.75);
+  color: var(--md-sys-color-primary);
+}
+
+/* ==========================================================================
+   Material 3 Chips (Filter, Assist, Input)
+   ========================================================================== */
+.md-chip-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  scrollbar-width: none;
+}
+
+.md-chip-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.md-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.md-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 36px;
+  min-height: var(--md-sys-touch-target-min);
+  padding: 0 1rem;
+  border-radius: var(--md-sys-shape-corner-small);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  background-color: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-on-surface);
+  font: var(--md-sys-typescale-label-large);
+  cursor: pointer;
+  transition: background-color var(--md-sys-motion-duration-short) ease,
+              border-color var(--md-sys-motion-duration-short) ease,
+              color var(--md-sys-motion-duration-short) ease;
+}
+
+.md-chip--selected {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  border-color: transparent;
+  font-weight: 700;
+}
+
+.md-chip--success {
+  background-color: var(--md-sys-color-success-container);
+  color: var(--md-sys-color-on-success-container);
+  border-color: transparent;
+}
+
+.md-chip__badge {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+/* ==========================================================================
+   Material 3 Buttons & Icon Buttons
+   ========================================================================== */
+.md-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: var(--md-sys-touch-target-min);
+  padding: 0 1.5rem;
+  border-radius: var(--md-sys-shape-corner-full);
+  border: none;
+  font: var(--md-sys-typescale-label-large);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform var(--md-sys-motion-duration-short) ease,
+              box-shadow var(--md-sys-motion-duration-short) ease,
+              background-color var(--md-sys-motion-duration-short) ease;
+}
+
+.md-button:active {
+  transform: scale(0.97);
+}
+
+.md-button--filled {
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.md-button--tonal {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.md-button--text {
+  background-color: transparent;
+  color: var(--md-sys-color-primary);
+}
+
+.md-button--success {
+  background-color: var(--md-sys-color-success);
+  color: var(--md-sys-color-on-success);
+}
+
+.md-button--small {
+  min-height: 36px;
+  padding: 0 1rem;
+}
+
+.md-button--large {
+  min-height: 48px;
+  padding: 0 1.75rem;
+}
+
+.md-button--block {
+  width: 100%;
+}
+
+.md-icon-button {
+  width: 48px;
+  height: 48px;
+  min-width: var(--md-sys-touch-target-min);
+  min-height: var(--md-sys-touch-target-min);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--md-sys-shape-corner-full);
+  color: var(--md-sys-color-on-surface-variant);
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: background-color var(--md-sys-motion-duration-short) ease;
+}
+
+.md-icon-button:hover {
+  background-color: var(--md-sys-color-surface-container-high);
+}
+
+/* ==========================================================================
+   Material 3 Checkbox & Tactile Controls
+   ========================================================================== */
+.md-checkbox {
+  width: 48px;
+  height: 48px;
+  min-width: var(--md-sys-touch-target-min);
+  min-height: var(--md-sys-touch-target-min);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.md-checkbox__box {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--md-sys-color-outline);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--md-sys-color-on-primary);
+  font-weight: 800;
+  font-size: 0.85rem;
+  transition: background-color var(--md-sys-motion-duration-short) ease,
+              border-color var(--md-sys-motion-duration-short) ease;
+}
+
+.md-checkbox--checked .md-checkbox__box {
+  background-color: var(--md-sys-color-primary);
+  border-color: var(--md-sys-color-primary);
+}
+
+/* ==========================================================================
+   List Item Card Styling
+   ========================================================================== */
+.md-list-subhead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding: 0 0.25rem;
+}
+
+.md-items-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.md-list-item-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0;
+  border-radius: var(--md-sys-shape-corner-medium);
+}
+
+.md-list-item-card:hover {
+  background-color: var(--md-sys-color-surface-container);
+}
+
+.md-list-item-card--collected {
+  opacity: 0.6;
+}
+
+.md-list-item-card__index {
+  font: var(--md-sys-typescale-label-medium);
+  color: var(--md-sys-color-outline);
+  width: 20px;
+}
+
+.md-list-item-card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.md-list-item-card__title {
+  font: var(--md-sys-typescale-title-medium);
+}
+
+.md-list-item-card__title--struck {
+  text-decoration: line-through;
+  color: var(--md-sys-color-outline);
+}
+
+.md-list-item-card__subtitle {
+  font: var(--md-sys-typescale-body-small);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+/* ==========================================================================
+   Store Selector Card & Bottom Sheet
+   ========================================================================== */
+.md-store-card__body {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.md-store-card__icon-box {
+  font-size: 1.75rem;
+}
+
+.md-store-card__info {
+  flex: 1;
+}
+
+.md-store-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.md-store-option-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+.md-store-option-card:hover, .md-store-option-card--active {
+  border-color: var(--md-sys-color-primary);
+  background-color: var(--md-sys-color-primary-container);
+}
+
+.md-radio-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--md-sys-color-outline);
+}
+
+.md-radio-circle--selected {
+  border-color: var(--md-sys-color-primary);
+  background: radial-gradient(circle, var(--md-sys-color-primary) 40%, transparent 45%);
+}
+
+/* ==========================================================================
+   Shopping Mode Live Progress & Pick Grid
+   ========================================================================== */
+.md-shopping-header-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.md-linear-progress-group__labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+}
+
+.md-linear-progress {
+  height: 8px;
+  background-color: var(--md-sys-color-surface-container-highest);
+  border-radius: var(--md-sys-shape-corner-full);
+  overflow: hidden;
+}
+
+.md-linear-progress__indicator {
+  height: 100%;
+  background-color: var(--md-sys-color-success);
+  border-radius: var(--md-sys-shape-corner-full);
+  transition: width var(--md-sys-motion-duration-medium) ease;
+}
+
+.md-pick-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.md-pick-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  margin-bottom: 0;
+}
+
+.md-pick-card--next {
+  border: 2px solid var(--md-sys-color-primary);
+  background-color: var(--md-sys-color-surface-container-high);
+}
+
+.md-pick-card__leading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.md-pick-card__icon {
+  font-size: 2rem;
+}
+
+.md-pick-card__title {
+  font: var(--md-sys-typescale-title-medium);
+  margin: 0;
+}
+
+.md-pick-card__dept {
+  font: var(--md-sys-typescale-body-small);
+  color: var(--md-sys-color-on-surface-variant);
+  margin: 0;
+}
+
+/* ==========================================================================
+   Store Inventory Map Stepper
+   ========================================================================== */
+.md-map-viewer-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.md-timeline-stepper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.md-timeline-step {
+  display: flex;
+  gap: 1rem;
+}
+
+.md-timeline-step__indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 32px;
+}
+
+.md-timeline-step__badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: var(--md-sys-typescale-label-medium);
+  font-weight: 700;
+}
+
+.md-timeline-step__line {
+  flex: 1;
+  width: 2px;
+  background-color: var(--md-sys-color-outline-variant);
+  margin: 4px 0;
+  min-height: 24px;
+}
+
+.md-timeline-step__card {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 0;
+}
+
+.md-timeline-step__icon {
+  font-size: 1.5rem;
+}
+
+/* ==========================================================================
+   Badges & Empty States
+   ========================================================================== */
+.md-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--md-sys-shape-corner-full);
+  font: var(--md-sys-typescale-label-small);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.md-badge--primary {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+.md-badge--success {
+  background-color: var(--md-sys-color-success-container);
+  color: var(--md-sys-color-on-success-container);
+}
+
+.md-badge--neutral {
+  background-color: var(--md-sys-color-surface-container-highest);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.md-badge--live {
+  background-color: var(--md-sys-color-error-container);
+  color: var(--md-sys-color-on-error-container);
+}
+
+.md-empty-state {
+  text-align: center;
+  padding: 3.5rem 1.5rem;
+}
+
+.md-empty-state__icon {
+  font-size: 3.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.md-text-secondary {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.md-flex-center-gap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

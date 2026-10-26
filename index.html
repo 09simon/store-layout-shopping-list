@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#1b1b1f" />
+  <title>PathFinder Grocery - Stock Android Shopping & Layout Route</title>
+  <meta name="description" content="Community physical grocery store route tracker and shopping list application with stock Material 3 Android UX." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Google+Sans:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles/app.css" />
+</head>
+<body class="md-app-body">
+  <div id="app-root" class="md-layout-dock">
+    <div id="top-app-bar-root"></div>
+
+    <main class="md-main-content">
+      <div id="store-selector-root"></div>
+      <div id="editor-root"></div>
+      <div id="list-view-root"></div>
+      <div id="shopping-mode-root" class="hidden"></div>
+      <div id="layout-viewer-root" class="hidden"></div>
+    </main>
+
+    <div id="fab-root"></div>
+    <div id="bottom-nav-root"></div>
+    <div id="modal-sheet-root"></div>
+  </div>
+
+  <script type="module" src="/src/app.ts"></script>
+</body>
+</html>
